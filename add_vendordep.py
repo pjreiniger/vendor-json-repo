@@ -36,7 +36,7 @@ def add_vendordep(vendordep_filename, is_beta):
 
 def main():
     parser = argparse.ArgumentParser(
-        "Generates one or more vendordep repository bundles for publication"
+        "Adds a new version of the vendordep"
     )
     parser.add_argument(
         "--vendordep_file",

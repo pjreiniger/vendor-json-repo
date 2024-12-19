@@ -3,7 +3,7 @@ description: 'Adds a vendordep to the repository and creates a pull request the 
 
 inputs:
   token:
-    description: 'Build Buddy API token'
+    description: 'GitHub API token'
     required: true
   vendordep_file:
     description: 'Path to the vendordep file to upload'
