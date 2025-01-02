@@ -65,9 +65,11 @@ runs:
         git add .
         git commit -m "${{ inputs.pr_title }}"
         git push --set-upstream origin ${{ inputs.pr_branch }} -f
+      working-directory: "vendor-json-repo"
 
     - name: Create PR
       shell: bash
-      run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --base main --head ${{ inputs.fork_organization }}:$(git branch --show-current)
+      working-directory: "vendor-json-repo"
+      run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:$(git branch --show-current)
       env:
         GH_TOKEN: ${{ inputs.token }}  
