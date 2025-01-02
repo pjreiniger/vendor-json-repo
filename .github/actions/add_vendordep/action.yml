@@ -64,7 +64,6 @@ runs:
         
     - name: CreateYYYY Pull Request
       uses: peter-evans/create-pull-request@v6
-      working-directory: vendor-json-repo
       with:
         push-to-fork: wpilibsuite/vendor-json-repo
         path: vendor-json-repo
