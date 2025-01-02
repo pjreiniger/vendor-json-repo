@@ -67,6 +67,7 @@ runs:
         git push --set-upstream origin ${{ inputs.pr_branch }} -f
 
     - name: Create PR
+      shell: bash
       run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --base main --head ${{ inputs.fork_organization }}:$(git branch --show-current)
       env:
         GH_TOKEN: ${{ inputs.token }}  
