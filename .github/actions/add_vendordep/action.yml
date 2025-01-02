@@ -65,7 +65,7 @@ runs:
     - name: Create Gentool Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
-        push-to-fork: pjreiniger/vendor-json-repo # TODO replace with wpilibsuite
+        push-to-fork: wpilibsuite/vendor-json-repo # TODO replace with wpilibsuite
         path: vendor-json-repo
         base: main
         branch: ${{ inputs.pr_branch }} 
