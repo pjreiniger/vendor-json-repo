@@ -14,6 +14,9 @@ inputs:
   pr_branch:
     description: 'The name of the branch to use when creating the pull request'
     required: true
+  fork_organization:
+    description: 'The name of your organization which owns the vendor-json-repo fork used to create the PR from'
+    required: true
   is_beta:
     description: "If true, this will be added to the years beta files"
     default: false
@@ -23,12 +26,23 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
+    - name: Clone fork
+      uses: actions/checkout@v4
       with:
-        repository: 'wpilibsuite/vendor-json-repo'
+        repository: '$FORK_ORG/vendor-json-repo'
         fetch-depth: 0  # Fetch all history so we can use git diff
         path: "vendor-json-repo"
         ref: "main"
+      env:
+        FORK_ORG: ${{ inputs.fork_organization }}
+        
+    - name: Checkout PR branch on fork
+      run: |
+        git remote add upstream https://github.com/wpilibsuite/vendor-json-repo.git
+        git fetch upstream
+        git checkout -b $PR_BRANCH upstream/main
+      env:
+        PR_BRANCH: ${{ inputs.pr_branch }}
 
     - uses: actions/setup-python@v5
       with:
@@ -50,6 +64,7 @@ runs:
     - name: Create Gentool Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
+        push-to-fork: pjreiniger/vendor-json-repo # TODO replace with wpilibsuite
         path: vendor-json-repo
         base: main
         branch: ${{ inputs.pr_branch }} 
