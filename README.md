@@ -98,6 +98,8 @@ To create a new bundle and add it to the CI job to be checked, generated, and pu
 ## Automatically creating pull requests
 If your libraries CI creates a new vendordep.json file, you can use an action contained in this repository to automatically create a pull request to add your changes. In order for the action to work, you must have a fork of this repository and define a secret with write access to be able to create the pull request.
 
+The token must be a Fine-grained [Personal Access Token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with `contents: write` and `pull-requests: write` scopes.
+
 Here is an example workflow:
 
 ```
@@ -117,5 +119,6 @@ jobs:
           vendordep_file: <path to vendordep file>
           pr_title: "Automatically add <library name> version <version>"
           pr_branch: "publish_<library name>_<version>"
+          fork_organization: <your organization name>
           is_beta: true
 ```
