@@ -37,6 +37,7 @@ runs:
         FORK_ORG: ${{ inputs.fork_organization }}
         
     - name: Checkout PR branch on fork
+      shell: bash
       run: |
         git remote add upstream https://github.com/wpilibsuite/vendor-json-repo.git
         git fetch upstream
