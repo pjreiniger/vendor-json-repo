@@ -76,4 +76,5 @@ runs:
       shell: bash
       working-directory: "vendor-json-repo"
       run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:${{ inputs.pr_branch }}
-
+      env:
+        GH_TOKEN: ${{ inputs.token }}  
