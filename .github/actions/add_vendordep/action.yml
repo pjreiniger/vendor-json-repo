@@ -58,17 +58,14 @@ runs:
         VENDORDEP_FILE: ${{ inputs.vendordep_file }}
         IS_BETA: ${{ inputs.is_beta }}
         
-    - name: Commit and push 
-      shell: bash
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add .
-        git commit -m "${{ inputs.pr_title }}"
-        git push --set-upstream origin ${{ inputs.pr_branch }} -f
-      working-directory: "vendor-json-repo"
-      env:
-        GH_TOKEN: ${{ inputs.token }}  
+    - name: Create Gentool Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        path: vendor-json-repo
+        base: main
+        branch: ${{ inputs.pr_branch }} 
+        token: ${{ inputs.token }}
+        title:  ${{ inputs.pr_title }}
 
     - name: Create PR
       shell: bash
