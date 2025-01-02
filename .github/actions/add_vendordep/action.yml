@@ -67,6 +67,8 @@ runs:
         git commit -m "${{ inputs.pr_title }}"
         git push --set-upstream origin ${{ inputs.pr_branch }} -f
       working-directory: "vendor-json-repo"
+      env:
+        GH_TOKEN: ${{ inputs.token }}  
 
     - name: Create PR
       shell: bash
