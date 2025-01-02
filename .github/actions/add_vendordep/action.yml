@@ -29,12 +29,10 @@ runs:
     - name: Clone fork
       uses: actions/checkout@v4
       with:
-        repository: '$FORK_ORG/vendor-json-repo'
+        repository: '${{ inputs.fork_organization }}/vendor-json-repo'
         fetch-depth: 0  # Fetch all history so we can use git diff
         path: "vendor-json-repo"
         ref: "main"
-      env:
-        FORK_ORG: ${{ inputs.fork_organization }}
         
     - name: Checkout PR branch on fork
       shell: bash
