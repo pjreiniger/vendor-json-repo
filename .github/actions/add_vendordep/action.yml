@@ -58,6 +58,7 @@ runs:
         IS_BETA: ${{ inputs.is_beta }}
         
     - name: Commit and push 
+      shell: bash
       run: |
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
@@ -68,4 +69,4 @@ runs:
     - name: Create PR
       run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --base main --head ${{ inputs.fork_organization }}:$(git branch --show-current)
       env:
-        GH_TOKEN: ${{ secrets.VENDOR_JSON_REPO_PUSH_TOKEN }}  
+        GH_TOKEN: ${{ inputs.token }}  
