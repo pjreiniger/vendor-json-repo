@@ -61,10 +61,20 @@ runs:
         branch: ${{ inputs.pr_branch }} 
         token: ${{ inputs.token }}
         title:  ${{ inputs.pr_title }}
+        
+    - name: Create Gentool Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        push-to-fork: wpilibsuite/vendor-json-repo
+        path: vendor-json-repo
+        base: main
+        branch: ${{ inputs.pr_branch }} 
+        token: ${{ inputs.token }}
+        title:  ${{ inputs.pr_title }}
 
-    - name: Create PR
-      shell: bash
-      working-directory: "vendor-json-repo"
-      run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:${{ inputs.pr_branch }}
-      env:
-        GH_TOKEN: ${{ inputs.token }}  
+    # - name: Create PR
+    #   shell: bash
+    #   working-directory: "vendor-json-repo"
+    #   run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:${{ inputs.pr_branch }}
+    #   env:
+    #     GH_TOKEN: ${{ inputs.token }}  
