@@ -39,11 +39,6 @@ runs:
       shell: bash
       run: |
         git remote add upstream https://github.com/wpilibsuite/vendor-json-repo.git
-        git fetch upstream
-        # git checkout -b $PR_BRANCH upstream/main
-        git checkout -b $PR_BRANCH
-      env:
-        PR_BRANCH: ${{ inputs.pr_branch }}
       working-directory: vendor-json-repo
 
     - uses: actions/setup-python@v5
@@ -70,6 +65,6 @@ runs:
     - name: Create PR
       shell: bash
       working-directory: "vendor-json-repo"
-      run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:$(git branch --show-current)
+      run: gh pr create --repo wpilibsuite/vendor-json-repo --title "${{ inputs.pr_title }}" --body "Automated pull request" --base main --head ${{ inputs.fork_organization }}:${{ inputs.pr_branch }}
       env:
         GH_TOKEN: ${{ inputs.token }}  
