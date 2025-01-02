@@ -44,6 +44,7 @@ runs:
         git checkout -b $PR_BRANCH
       env:
         PR_BRANCH: ${{ inputs.pr_branch }}
+      working-directory: vendor-json-repo
 
     - uses: actions/setup-python@v5
       with:
