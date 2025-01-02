@@ -32,7 +32,8 @@ runs:
         repository: '${{ inputs.fork_organization }}/vendor-json-repo'
         fetch-depth: 0  # Fetch all history so we can use git diff
         path: "vendor-json-repo"
-        ref: "main"
+        # ref: "main"
+        ref: "add_vendordep_action_private"
         
     - name: Checkout PR branch on fork
       shell: bash
@@ -40,7 +41,7 @@ runs:
         git remote add upstream https://github.com/wpilibsuite/vendor-json-repo.git
         git fetch upstream
         # git checkout -b $PR_BRANCH upstream/main
-        git checkout -b $PR_BRANCH origin/add_vendordep_action_private
+        git checkout -b $PR_BRANCH
       env:
         PR_BRANCH: ${{ inputs.pr_branch }}
 
