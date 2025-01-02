@@ -40,7 +40,7 @@ runs:
         git remote add upstream https://github.com/wpilibsuite/vendor-json-repo.git
         git fetch upstream
         # git checkout -b $PR_BRANCH upstream/main
-        git checkout -b $PR_BRANCH add_vendordep_action_private
+        git checkout -b $PR_BRANCH origin/add_vendordep_action_private
       env:
         PR_BRANCH: ${{ inputs.pr_branch }}
 
